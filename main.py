@@ -182,6 +182,7 @@ def plot_pei_LiuYanLin():
         .add("", data_pair)
         .set_global_opts(title_opts=opts.TitleOpts(title="贷款成功率"))
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
+        .render("pie_base.html")
     )
 
     st.title("贷款成功率饼图")
@@ -196,7 +197,7 @@ def plot_pei_LiuYanLin():
     # 绘制饼图
     if not df_selected.empty:
         pie_chart = plot_pie_chart(df_selected)
-        st_pyecharts(pie_chart)
+        st_pyecharts(pie)
     else:
         st.error("根据所选地区没有找到数据，请重新选择。")
             
