@@ -173,46 +173,101 @@ def page_plot_heatmap():
     st.pyplot(fig)
     return None
 
-def plot_pei_LiuYanLin():
-    # 设置图表样式
-    plt.style.use("ggplot")
+# def plot_pei_LiuYanLin():
+#     # 设置图表样式
+#     plt.style.use("ggplot")
+#     # 获取筛选后的数据
+#     df_selected = data_selected()
+#     # 用户选择分类方式
+#     choice_x = st.selectbox('选择分类方式', df_selected.columns.tolist())
+#     # 分组数据
+#     df_grouped = df_selected.groupby(choice_x).size().reset_index(name='counts')
+#     # 判断数据集是否为空
+#     if df_grouped.empty:
+#         st.text('您选择的数据集为空，请取消一些选择器。')
+#         return None
+#     # 构造饼图数据
+#     data_pair = [list(z) for z in zip(df_grouped[choice_x], df_grouped['counts'])]
+#     # 创建饼图
+#     pie_chart = (
+#         Pie(init_opts=opts.InitOpts(bg_color="#2c3e50"))  # 可以设置背景色等初始化选项
+#         .add(
+#             series_name="贷款状态",
+#             data_pair=data_pair,
+#             radius=["40%", "75%"],
+#             label_opts=opts.LabelOpts(
+#                 position="outside",
+#                 formatter="{b|{b}: }{c}  ({d}%)",
+#                 background_color="#eee",
+#                 border_color="#aaa",
+#                 border_width=1,
+#                 border_radius=4,
+#                 rich={
+#                     "b": {"fontSize": 16, "lineHeight": 33},
+#                     "per": {"color": "#eee", "backgroundColor": "#334455", "padding": [2, 4], "borderRadius": 2},
+#                 },
+#             ),
+#         )
+#         .set_global_opts(title_opts=opts.TitleOpts(title="Pie-基本示例"))
+#         .set_series_opts(label_opts=opts.LabelOpts(formatter=JsCode("function(x){return x.data.name + ': ' + x.data.value;}")))
+#     )
+#     # 在Streamlit中渲染饼图
+#     st_pyecharts(pie_chart)
+
+
+
+# 假设这是您的数据选取函数
+def data_selected():
+    # 这里应该有数据处理的代码，返回DataFrame
+    # 为了演示，我们将使用一个简单的字典来模拟DataFrame
+    return {
+        '分类': ['分类1', '分类2', '分类3'],
+        '计数': [10, 20, 30]
+    }
+
+def plot_pie_chart():
     # 获取筛选后的数据
-    df_selected = data_selected()
-    # 用户选择分类方式
-    choice_x = st.selectbox('选择分类方式', df_selected.columns.tolist())
-    # 分组数据
-    df_grouped = df_selected.groupby(choice_x).size().reset_index(name='counts')
-    # 判断数据集是否为空
-    if df_grouped.empty:
-        st.text('您选择的数据集为空，请取消一些选择器。')
-        return None
-    # 构造饼图数据
-    data_pair = [list(z) for z in zip(df_grouped[choice_x], df_grouped['counts'])]
+    data = data_selected()
+    # 转换数据格式以符合pyecharts饼图的要求
+    data_pair = [list(z) for z in zip(data['分类'], data['计数'])]
+    
     # 创建饼图
     pie_chart = (
-        Pie(init_opts=opts.InitOpts(bg_color="#2c3e50"))  # 可以设置背景色等初始化选项
+        Pie()
         .add(
-            series_name="贷款状态",
+            series_name="示例系列",
             data_pair=data_pair,
             radius=["40%", "75%"],
             label_opts=opts.LabelOpts(
                 position="outside",
                 formatter="{b|{b}: }{c}  ({d}%)",
-                background_color="#eee",
-                border_color="#aaa",
-                border_width=1,
-                border_radius=4,
                 rich={
                     "b": {"fontSize": 16, "lineHeight": 33},
                     "per": {"color": "#eee", "backgroundColor": "#334455", "padding": [2, 4], "borderRadius": 2},
                 },
             ),
         )
-        .set_global_opts(title_opts=opts.TitleOpts(title="Pie-基本示例"))
-        .set_series_opts(label_opts=opts.LabelOpts(formatter=JsCode("function(x){return x.data.name + ': ' + x.data.value;}")))
+        .set_global_opts(title_opts=opts.TitleOpts(title="饼图示例"))
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
     )
-    # 在Streamlit中渲染饼图
+    
+    # 使用st_pyecharts在Streamlit中渲染饼图
     st_pyecharts(pie_chart)
+
+def main():
+    # 创建一个侧边栏选择器，用于选择饼图的显示方式
+    chart_type = st.sidebar.selectbox("选择图表类型", ["饼图", "其他图表"])
+    
+    # 根据选择的图表类型来显示相应的图表
+    if chart_type == "饼图":
+        plot_pie_chart()
+    # 可以添加更多elif来添加其他图表类型的处理
+    # elif chart_type == "其他图表":
+        # 其他图表的函数调用
+
+# 运行主函数
+if __name__ == '__main__':
+    main()
 
 
 #Author:Yuxi Guo
