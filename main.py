@@ -184,7 +184,7 @@ def plot_pei_LiuYanLin():
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
     )
 
-     st.title("贷款成功率饼图")
+    st.title("贷款成功率饼图")
     
     # 用户选择地区类型
     area_options = ['Urban', 'Semiurban', 'Rural']
