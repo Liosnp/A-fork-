@@ -173,43 +173,43 @@ def page_plot_heatmap():
     st.pyplot(fig)
     return None
 
-# def data_selected1(is_urban=None):
-#     df = pd.read_csv('loan_sanction_train.csv')
-#     df = wash_data(df)
-#     if is_urban is not None:
-#         df = df[df['Property_Area'].isin(is_urban)]
-#     return df
+def data_selected(is_urban=None):
+    df = pd.read_csv('loan_sanction_train.csv')
+    df = wash_data(df)
+    if is_urban is not None:
+        df = df[df['Property_Area'].isin(is_urban)]
+    return df
 
-# def plot_pie_chart(df):
-#     loan_status = df['Loan_Status'].value_counts(normalize=True)
-#     data_pair = [list(z) for z in zip(loan_status.index, loan_status.values)]
-#     pie = (
-#         Pie()
-#         .add("", data_pair)
-#         .set_global_opts(title_opts=opts.TitleOpts(title="贷款成功率"))
-#         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
-#     )
-#     return pie
+def plot_pie_chart(df):
+    loan_status = df['Loan_Status'].value_counts(normalize=True)
+    data_pair = [list(z) for z in zip(loan_status.index, loan_status.values)]
+    pie = (
+        Pie()
+        .add("", data_pair)
+        .set_global_opts(title_opts=opts.TitleOpts(title="贷款成功率"))
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
+    )
+    return pie
 
-# def main():
-#     st.title("贷款成功率饼图")
+def main():
+    st.title("贷款成功率饼图")
     
-#     # 用户选择地区类型
-#     area_options = ['Urban', 'Semiurban', 'Rural']
-#     selected_areas = st.multiselect('选择地区类型', options=area_options)
+    # 用户选择地区类型
+    area_options = ['Urban', 'Semiurban', 'Rural']
+    selected_areas = st.multiselect('选择地区类型', options=area_options)
     
-#     # 获取并清洗数据
-#     df_selected1 = data_selected1(is_urban=selected_areas)
+    # 获取并清洗数据
+    df_selected = data_selected(is_urban=selected_areas)
     
-#     # 绘制饼图
-#     if not df_selected1.empty:
-#         pie_chart = plot_pie_chart(df_selected1)
-#         st_pyecharts(pie_chart)
-#     else:
-#         st.error("根据所选地区没有找到数据，请重新选择。")
+    # 绘制饼图
+    if not df_selected1.empty:
+        pie_chart = plot_pie_chart(df_selected)
+        st_pyecharts(pie_chart)
+    else:
+        st.error("根据所选地区没有找到数据，请重新选择。")
 
-# if __name__ == "__main__":
-#     main()
+
+    main()
 
 
 
@@ -270,27 +270,27 @@ def page_plot_heatmap():
 
 #     main()
 
-def plot_pei_LiuYanLin():
-    # 用户选择地区类型
-    area_options = ['Urban', 'Semiurban', 'Rural']
-    selected_areas = st.multiselect('选择地区类型', options=area_options)
+# def plot_pei_LiuYanLin():
+#     # 用户选择地区类型
+#     area_options = ['Urban', 'Semiurban', 'Rural']
+#     selected_areas = st.multiselect('选择地区类型', options=area_options)
     
-    # 获取并清洗数据
-    df_selected = data_selected(is_urban=selected_areas)
+#     # 获取并清洗数据
+#     df_selected = data_selected(is_urban=selected_areas)
     
-    # 如果数据不为空，则绘制饼图
-    if not df_selected.empty:
-        loan_status_counts = df_selected['Loan_Status'].value_counts().rename(index={1: 'Yes', 0: 'No'})
-        data_pair = [list(z) for z in zip(loan_status_counts.index, loan_status_counts.values)]
-        pie_chart = (
-            Pie()
-            .add("", data_pair)
-            .set_global_opts(title_opts=opts.TitleOpts(title="贷款成功率"))
-            .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
-        )
-        st_pyecharts(pie_chart)
-    else:
-        st.error("根据所选地区没有找到数据，请重新选择。")
+#     # 如果数据不为空，则绘制饼图
+#     if not df_selected.empty:
+#         loan_status_counts = df_selected['Loan_Status'].value_counts().rename(index={1: 'Yes', 0: 'No'})
+#         data_pair = [list(z) for z in zip(loan_status_counts.index, loan_status_counts.values)]
+#         pie_chart = (
+#             Pie()
+#             .add("", data_pair)
+#             .set_global_opts(title_opts=opts.TitleOpts(title="贷款成功率"))
+#             .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
+#         )
+#         st_pyecharts(pie_chart)
+#     else:
+#         st.error("根据所选地区没有找到数据，请重新选择。")
 
 
 #Author:Yuxi Guo
