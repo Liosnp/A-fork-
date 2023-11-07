@@ -173,15 +173,9 @@ def page_plot_heatmap():
     st.pyplot(fig)
     return None
 
-def data_selected(is_urban=None):
-    df = pd.read_csv('loan_sanction_train.csv')
-    df = wash_data(df)
-    if is_urban is not None:
-        df = df[df['Property_Area'].isin(is_urban)]
-    return df
 
-def plot_pie_chart(df):
-    loan_status = df['Loan_Status'].value_counts(normalize=True)
+def plot_pei_LiuYanLin():
+    loan_status = df_selected['Loan_Status'].value_counts(normalize=True)
     data_pair = [list(z) for z in zip(loan_status.index, loan_status.values)]
     pie = (
         Pie()
@@ -189,10 +183,8 @@ def plot_pie_chart(df):
         .set_global_opts(title_opts=opts.TitleOpts(title="贷款成功率"))
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
     )
-    return pie
 
-def main():
-    st.title("贷款成功率饼图")
+     st.title("贷款成功率饼图")
     
     # 用户选择地区类型
     area_options = ['Urban', 'Semiurban', 'Rural']
@@ -202,14 +194,14 @@ def main():
     df_selected = data_selected(is_urban=selected_areas)
     
     # 绘制饼图
-    if not df_selected1.empty:
+    if not df_selected.empty:
         pie_chart = plot_pie_chart(df_selected)
         st_pyecharts(pie_chart)
     else:
         st.error("根据所选地区没有找到数据，请重新选择。")
+            
+    return None
 
-
-    main()
 
 
 
