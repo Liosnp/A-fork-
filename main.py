@@ -174,7 +174,8 @@ def page_plot_heatmap():
     return None
 
 
-def plot_pei_LiuYanLin():
+def plot_pie_LiuYanLin(is_urban=None):
+    df_selected=data_selected()
     loan_status = df_selected['Loan_Status'].value_counts(normalize=True)
     data_pair = [list(z) for z in zip(loan_status.index, loan_status.values)]
     pie = (
@@ -197,7 +198,7 @@ def plot_pei_LiuYanLin():
     # 绘制饼图
     if not df_selected.empty:
         pie_chart = plot_pie_chart(df_selected)
-        st_pyecharts(pie)
+        st_pyecharts(pie_chart)
     else:
         st.error("根据所选地区没有找到数据，请重新选择。")
             
@@ -306,7 +307,7 @@ def main():
     elif page=='Plot_heatmap':
         page_plot_heatmap()
     elif page=='LiuYanlin_pie':
-        plot_pei_LiuYanLin()    
+        plot_pie_LiuYanLin()    
     elif page=='LiuTianqi':
         page_question2()
     elif page=='HuXintong':
