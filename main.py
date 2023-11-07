@@ -174,7 +174,7 @@ def page_plot_heatmap():
     return None
 
 
-def plot_pie_LiuYanLin(is_urban=None):
+def plot_pie_LiuYanLin():
     df_selected=data_selected()
     loan_status = df_selected['Loan_Status'].value_counts(normalize=True)
     data_pair = [list(z) for z in zip(loan_status.index, loan_status.values)]
@@ -183,7 +183,7 @@ def plot_pie_LiuYanLin(is_urban=None):
         .add("", data_pair)
         .set_global_opts(title_opts=opts.TitleOpts(title="贷款成功率"))
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
-        .render("pie_base.html")
+        
     )
 
     st.title("贷款成功率饼图")
@@ -193,7 +193,7 @@ def plot_pie_LiuYanLin(is_urban=None):
     selected_areas = st.multiselect('选择地区类型', options=area_options)
     
     # 获取并清洗数据
-    df_selected = data_selected(is_urban=selected_areas)
+    # df_selected = data_selected(is_urban=selected_areas)
     
     # 绘制饼图
     if not df_selected.empty:
