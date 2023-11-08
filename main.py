@@ -106,7 +106,7 @@ def page_plot_bar():
     df_selected=data_selected()
     
 
-    st.markdown('# **On this page, you can clearly understand the proportion of data in different categories** :thinking_face:')
+    st.markdown('# **Average value matters while making your own decision** ')
     st.markdown('''
     ### 🔔 Use `multi-select` to change the category
     ''', unsafe_allow_html=True)
@@ -126,7 +126,8 @@ def page_plot_bar():
 def page_plot_box():
     plt.style.use("ggplot")
     st.title('Boxplot')
-    st.markdown('# This page will tell you about the discreteness of the data')
+    st.markdown('''# This page will tell you about the discreteness of the data  /n
+    ## SEE WHERE U R AT 👀''')
 
     df_selected = data_selected().drop('Loan_ID',axis=1)
     df_x=df_selected[['Is_Female','Is_graduate','Is_married','Is_urban','Is_self_employed','Loan_Status','Credit_History','Dependents']]
