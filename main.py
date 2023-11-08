@@ -217,9 +217,9 @@ def plot_pie_chart():
         
     )
     st.write("## made it here")
-    st_pyecharts(pie_chart)
+    st.pyplot(pie_chart)
     # 使用st_pyecharts在Streamlit中渲染饼图
-    return pie_chart
+    return 
 
     
 #Author:Yuxi Guo
