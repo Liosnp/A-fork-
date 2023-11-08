@@ -192,16 +192,13 @@ def page_plot_heatmap():
 
 def plot_pie_chart():
 
-    st.text("Starting plot_pie_chart()")
     df_selected = pd.read_csv('loan_sanction_train.csv')
     
     # 贷款状态映射到字符串标签
     df_selected['Loan_Status'] = df_selected['Loan_Status'].map({'Y': 'Yes', 'N': 'No'})
-    st.write("# read in data")
     # 用户选择地区类型
     area_options = ['Urban', 'Semiurban', 'Rural']
     selected_area = st.sidebar.selectbox('选择地区类型', area_options)
-    st.write("# past selection")
     # 根据所选地区筛选数据
     df_area_selected = df_selected[df_selected['Property_Area'] == selected_area]
     
@@ -218,8 +215,7 @@ def plot_pie_chart():
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
         
     )
-    st.write("## made it here")
-    st.pyplot(pie_chart)
+    st_pyecharts(pie_chart)
     # 使用st_pyecharts在Streamlit中渲染饼图
     return None
 
@@ -244,7 +240,6 @@ def main():
         page_plot_heatmap()
     elif page=='LiuYanLin_pie':
         plot_pie_chart()
-        
     elif page=='LiuTianqi':
         page_question2()
     elif page=='HuXintong':
