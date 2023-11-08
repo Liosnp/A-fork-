@@ -106,7 +106,7 @@ def page_plot_bar():
     df_selected=data_selected()
     
 
-    st.markdown('# **On this page, you can clearly understand the proportion of data in different categories** :thinkingface:')
+    st.markdown('# **On this page, you can clearly understand the proportion of data in different categories** :thinking_face:')
     st.markdown('''
     ### 🔔 Use `multi-select` to change the category
     ''', unsafe_allow_html=True)
