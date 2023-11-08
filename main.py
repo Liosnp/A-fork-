@@ -212,44 +212,33 @@ def page_plot_heatmap():
 
 
 
-#选的模板
-# 假设这是您的数据选取函数
-def data_selected():
-    # 这里应该有数据处理的代码，返回DataFrame
-    # 为了演示，我们将使用一个简单的字典来模拟DataFrame
-    return {
-        '分类': ['分类1', '分类2', '分类3'],
-        '计数': [10, 20, 30]
-    }
+# 首先，我们需要读取数据集并基于Property_Area列和Loan_Status列生成饼图所需的data_pair
+
+# 由于我们无法直接读取文件，以下代码块应在本地环境中执行。
+
 
 def plot_pie_LiuYanLin():
-    # 获取筛选后的数据
-    data = data_selected()
-    # 转换数据格式以符合pyecharts饼图的要求
-    data_pair = [list(z) for z in zip(data['分类'], data['计数'])]
+    # 加载数据集
+    df_selected = data_selected()
+    # 计算每个地区贷款成功的比例
+    loan_status_by_area = df_selected.groupby('Property_Area')['Loan_Status'].value_counts(normalize=True).unstack()
+    loan_status_by_area = loan_status_by_area.fillna(0)  # 填充可能的NaN值
     
-    # 创建饼图
-    pie_chart = (
-        Pie()
-        .add(
-            series_name="示例系列",
-            data_pair=data_pair,
-            radius=["40%", "75%"],
-            label_opts=opts.LabelOpts(
-                position="outside",
-                formatter="{b|{b}: }{c}  ({d}%)",
-                rich={
-                    "b": {"fontSize": 16, "lineHeight": 33},
-                    "per": {"color": "#eee", "backgroundColor": "#334455", "padding": [2, 4], "borderRadius": 2},
-                },
-            ),
-        )
-        .set_global_opts(title_opts=opts.TitleOpts(title="饼图示例"))
-        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
-    )
+    # 选择一个地区进行可视化，例如 'Urban'
+    urban_data = loan_status_by_area.loc['Urban'].to_dict()
+    urban_data_pair = [list(item) for item in urban_data.items()]
     
-    # 使用st_pyecharts在Streamlit中渲染饼图
-    st_pyecharts(pie_chart)
+    # 生成饼图数据
+    pie_chart = Pie()
+    pie_chart.add("", urban_data_pair)
+    pie_chart.set_global_opts(title_opts=opts.TitleOpts(title="Urban Area Loan Approval Rates"))
+    pie_chart.set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
+    # 通常不需要在 Streamlit 中使用render，因为我们会使用st_pyecharts来渲染饼图
+    # pie_chart.render("pie_base.html")
+    
+    # 以下是 Streamlit 渲染饼图的代码，应在您的 Streamlit 应用脚本中执行
+    # st_pyecharts(pie_chart)
+
 #-------------------------------------------------------------
 # def main():
 #     # 创建一个侧边栏选择器，用于选择饼图的显示方式
