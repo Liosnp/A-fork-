@@ -210,34 +210,42 @@ def page_plot_heatmap():
 #-------------------------------------------------------------------------
 
 
-
-
-
-
-
+from pyecharts.faker import Faker
 def plot_pie_LiuYanLin():
-    # 加载数据集
-    df_selected = data_selected()
-    # 计算每个地区贷款成功的比例
-    loan_status_by_area = df_selected.groupby('Property_Area')['Loan_Status'].value_counts(normalize=True).unstack()
-    loan_status_by_area = loan_status_by_area.fillna(0)  # 填充可能的NaN值
-    
-    # 选择一个地区进行可视化，例如 'Urban'
-    urban_data = loan_status_by_area.loc['Urban'].to_dict()
-    urban_data_pair = [list(item) for item in urban_data.items()]
-    
-    # 生成饼图数据
-    pie_chart = (
+    c = (
         Pie()
-        .add("", urban_data_pair)
-        .set_global_opts(title_opts=opts.TitleOpts(title="Urban Area Loan Approval Rates"))
-        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
-        # 在 Streamlit 中通常不需要使用 .render() 方法
+        .add("", [list(z) for z in zip(Faker.choose(), Faker.values())])
+        .set_global_opts(title_opts=opts.TitleOpts(title="Pie-基本示例"))
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+        .render("pie_base.html")
     )
+    
+    st_pyecharts(pie_chart)
+
+#---------------------------------------------------------------
+# def plot_pie_LiuYanLin():
+#     # 加载数据集
+#     df_selected = data_selected()
+#     # 计算每个地区贷款成功的比例
+#     loan_status_by_area = df_selected.groupby('Property_Area')['Loan_Status'].value_counts(normalize=True).unstack()
+#     loan_status_by_area = loan_status_by_area.fillna(0)  # 填充可能的NaN值
+    
+#     # 选择一个地区进行可视化，例如 'Urban'
+#     urban_data = loan_status_by_area.loc['Urban'].to_dict()
+#     urban_data_pair = [list(item) for item in urban_data.items()]
+    
+#     # 生成饼图数据
+#     pie_chart = (
+#         Pie()
+#         .add("", urban_data_pair)
+#         .set_global_opts(title_opts=opts.TitleOpts(title="Urban Area Loan Approval Rates"))
+#         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
+      
+#     )
     
     
         
-     st_pyecharts(pie_chart)
+#      st_pyecharts(pie_chart)
 
 #-------------------------------------------------------------
 # def main():
