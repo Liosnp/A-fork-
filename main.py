@@ -220,7 +220,7 @@ c = (
         .render("pie_base.html")
     )
     
-st_pyecharts(pie_chart)
+st_pyecharts(c)
 
 #---------------------------------------------------------------
 # def plot_pie_LiuYanLin():
