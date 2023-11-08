@@ -217,7 +217,7 @@ def plot_pie_chart():
     )
     
     # 使用st_pyecharts在Streamlit中渲染饼图
-    st_pyecharts(pie_chart).render("liuyan_pie.html")
+    pie_chart.render("liuyan_pie.html")
     return None
 
     
