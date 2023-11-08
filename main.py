@@ -214,9 +214,9 @@ def plot_pie_chart():
         .add("", data_pair)
         .set_global_opts(title_opts=opts.TitleOpts(title=f"{selected_area} Area Loan Approval Rates"))
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
-        .render("liuyan_pie.html")
+        
     )
-    
+    st_pyecharts(pie_chart)
     # 使用st_pyecharts在Streamlit中渲染饼图
     return None
 
