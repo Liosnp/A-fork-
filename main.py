@@ -212,7 +212,7 @@ def page_plot_heatmap():
 
 
 
-选的模板
+#选的模板
 # 假设这是您的数据选取函数
 def data_selected():
     # 这里应该有数据处理的代码，返回DataFrame
@@ -250,7 +250,7 @@ def plot_pie_LiuYanLin():
     
     # 使用st_pyecharts在Streamlit中渲染饼图
     st_pyecharts(pie_chart)
-
+#-------------------------------------------------------------
 # def main():
 #     # 创建一个侧边栏选择器，用于选择饼图的显示方式
 #     chart_type = st.sidebar.selectbox("选择图表类型", ["饼图", "其他图表"])
