@@ -253,9 +253,9 @@ def page_plot_heatmap():
 
 # 假设 wash_data() 函数和 data_selected() 函数已经定义好，并且可以正常工作
 
-def plot_pie_chart(data, title):
-   
-    status_counts = data['Loan_Status'].value_counts(normalize=True)
+def plot_pie_chart():
+    df_selected=data_selected()
+    status_counts = df_selected['Loan_Status'].value_counts(normalize=True)
     data_pair = [list(z) for z in zip(status_counts.index, status_counts.values)]
     pie = (
         Pie()
@@ -263,32 +263,32 @@ def plot_pie_chart(data, title):
         .set_global_opts(title_opts=opts.TitleOpts(title="Loan Approval Rates"))
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
     )
-    return pie
+    st_pyecharts(pie)
 
-def main_for_pie():
-    st.title("贷款成功率饼图")
+# def main_for_pie():
+#     st.title("贷款成功率饼图")
 
-    # 从文件加载数据
-    df = data_selected()
+#     # 从文件加载数据
+#     df = data_selected()
 
-    # 转换贷款状态为字符串标签
-    df['Loan_Status'] = df['Loan_Status'].map({1: 'Yes', 0: 'No'})#???????
+#     # 转换贷款状态为字符串标签
+#     df['Loan_Status'] = df['Loan_Status'].map({1: 'Yes', 0: 'No'})#???????
 
-    # 用户选择地区类型
-    area_options = st.multiselect(
-        '选择地区类型', 
-        options=['Urban', 'Semiurban', 'Rural'],
-        default=['Urban', 'Semiurban', 'Rural']
-    )
+#     # 用户选择地区类型
+#     area_options = st.multiselect(
+#         '选择地区类型', 
+#         options=['Urban', 'Semiurban', 'Rural'],
+#         default=['Urban', 'Semiurban', 'Rural']
+#     )
 
-    # 根据所选地区筛选数据
-    if area_options:
-        df_selected = df[df['Property_Area'].isin(area_options)]
-        if not df_selected.empty:
-            pie_chart = plot_pie_chart(df_selected, "贷款成功率")
-            st_pyecharts(pie_chart)
-        else:
-            st.error("没有找到选定地区的数据。")
+#     # 根据所选地区筛选数据
+#     if area_options:
+#         df_selected = df[df['Property_Area'].isin(area_options)]
+#         if not df_selected.empty:
+#             pie_chart = plot_pie_chart(df_selected, "贷款成功率")
+#             st_pyecharts(pie_chart)
+#         else:
+#             st.error("没有找到选定地区的数据。")
 
 #-------------------------------------------------------------
 # def main():
