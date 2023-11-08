@@ -192,7 +192,7 @@ def page_plot_heatmap():
 
 def plot_pie_chart():
 
-    st.write("Starting plot_pie_chart()")
+    st.text("Starting plot_pie_chart()")
     df_selected = pd.read_csv('loan_sanction_train.csv')
     
     # 贷款状态映射到字符串标签
@@ -221,7 +221,7 @@ def plot_pie_chart():
     st.write("## made it here")
     st.pyplot(pie_chart)
     # 使用st_pyecharts在Streamlit中渲染饼图
-    return 
+    return None
 
     
 #Author:Yuxi Guo
