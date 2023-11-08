@@ -198,7 +198,7 @@ def plot_pie_chart():
     
     # 用户选择地区类型
     area_options = ['Urban', 'Semiurban', 'Rural']
-    selected_area = st.sidebar.selectbox('选择地区类型', tuple(area_options))
+    selected_area = st.sidebar.selectbox('选择地区类型', area_options)
     
     # 根据所选地区筛选数据
     df_area_selected = df_selected[df_selected['Property_Area'] == selected_area]
@@ -219,7 +219,7 @@ def plot_pie_chart():
     st.write("## made it here")
     st_pyecharts(pie_chart)
     # 使用st_pyecharts在Streamlit中渲染饼图
-    return None
+    return pie_chart
 
     
 #Author:Yuxi Guo
