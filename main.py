@@ -264,7 +264,7 @@ def plot_pie_chart():
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
     )
     st_pyecharts(pie)
-
+    return None
 # def main_for_pie():
 #     st.title("贷款成功率饼图")
 
