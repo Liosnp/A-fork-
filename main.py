@@ -198,8 +198,8 @@ def plot_pie_chart():
     
     # 用户选择地区类型
     area_options = ['Urban', 'Semiurban', 'Rural']
-    selected_area = st.sidebar.selectbox('选择地区类型', options=area_options)
-    
+    selected_area = st.sidebar.selectbox('sometext', options=area_options)
+    #选择地区类型
     # 根据所选地区筛选数据
     df_area_selected = df_selected[df_selected['Property_Area'] == selected_area]
     
