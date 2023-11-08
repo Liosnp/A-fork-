@@ -174,88 +174,10 @@ def page_plot_heatmap():
     return None
 
 #-----------------------------------------------------------------
-# def plot_pie_LiuYanLin():
-   
-
-    
-#     # 获取筛选后的数据
-#     data = data_selected()
-#     # 转换数据格式以符合pyecharts饼图的要求
-#     loan_status = data['Loan_Status'].value_counts(normalize=True)
-
-#     data_pair = [list(z) for z in zip(loan_status.index, loan_status.values)]
-    
-#     # 创建饼图
-#     pie_chart = (
-#         Pie()
-#         .add(
-#             series_name="示例系列",
-#             data_pair=data_pair,
-#             radius=["40%", "75%"],
-#             label_opts=opts.LabelOpts(
-#                 position="outside",
-#                 formatter="{b|{b}: }{c}  ({d}%)",
-#                 rich={
-#                     "b": {"fontSize": 16, "lineHeight": 33},
-#                     "per": {"color": "#eee", "backgroundColor": "#334455", "padding": [2, 4], "borderRadius": 2},
-#                 },
-#             ),
-#         )
-#         .set_global_opts(title_opts=opts.TitleOpts(title="饼图示例"))
-#         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
-#     )
-    
-#     # 使用st_pyecharts在Streamlit中渲染饼图
-#     st_pyecharts(pie_chart)
-#-------------------------------------------------------------------------
-
-
-# from pyecharts.faker import Faker
-# def plot_pie_LiuYanLin():
-#     c = (
-#         Pie()
-#         .add("", [list(z) for z in zip(Faker.choose(), Faker.values())])
-#         .set_global_opts(title_opts=opts.TitleOpts(title="Pie-基本示例"))
-#         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
-#         .render("pie_base.html")
-#         )
-    
-#     st_pyecharts(c)
-
-# #---------------------------------------------------------------
-# def plot_pie_LiuYanLin():
-#     # 加载数据集
-#     df_selected = data_selected()
-#     # 计算每个地区贷款成功的比例
-#     loan_status_by_area = df_selected.groupby('Property_Area')['Loan_Status'].value_counts(normalize=True).unstack()
-    
-    
-#     # 选择一个地区进行可视化，例如 'Urban'
-#     urban_data = loan_status_by_area['Urban'].to_dict()
-#     urban_data_pair = [list(item) for item in urban_data.items()]
-    
-#     # 生成饼图数据
-#     pie_chart = (
-#         Pie()
-#         .add("", urban_data_pair)
-#         .set_global_opts(title_opts=opts.TitleOpts(title="Urban Area Loan Approval Rates"))
-#         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
-      
-#     )
-    
-    
-        
-#      st_pyecharts(pie_chart)
-#-------------------------------------------------------------
-    # app.py
-
-
-
-# 假设 wash_data() 函数和 data_selected() 函数已经定义好，并且可以正常工作
 
 def plot_pie_chart():
     # 使用data_selected()函数获取筛选后的数据
-    df_selected = data_selected()
+    df_selected = pd.read_csv('loan_sanction_train.csv')
     # 贷款状态映射到字符串标签
     df_selected['Loan_Status'] = df_selected['Loan_Status'].map({1: 'Yes', 0: 'No'})
     
@@ -283,81 +205,7 @@ def plot_pie_chart():
 
 
 
-    # df_selected=data_selected()
-    # status_counts = df_selected['Loan_Status'].value_counts(normalize=True)
-    # data_pair = [list(z) for z in zip(status_counts.index, status_counts.values)]
-    # pie = (
-    #     Pie()
-    #     .add("", data_pair)
-    #     .set_global_opts(title_opts=opts.TitleOpts(title="Loan Approval Rates"))
-    #     .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
-    # )
-    # st_pyecharts(pie)
-    # return None
-# def main_for_pie():
-#     st.title("贷款成功率饼图")
-
-#     # 从文件加载数据
-#     df = data_selected()
-
-#     # 转换贷款状态为字符串标签
-#     df['Loan_Status'] = df['Loan_Status'].map({1: 'Yes', 0: 'No'})#???????
-
-#     # 用户选择地区类型
-#     area_options = st.multiselect(
-#         '选择地区类型', 
-#         options=['Urban', 'Semiurban', 'Rural'],
-#         default=['Urban', 'Semiurban', 'Rural']
-#     )
-
-#     # 根据所选地区筛选数据
-#     if area_options:
-#         df_selected = df[df['Property_Area'].isin(area_options)]
-#         if not df_selected.empty:
-#             pie_chart = plot_pie_chart(df_selected, "贷款成功率")
-#             st_pyecharts(pie_chart)
-#         else:
-#             st.error("没有找到选定地区的数据。")
-
-#-------------------------------------------------------------
-# def main():
-#     # 创建一个侧边栏选择器，用于选择饼图的显示方式
-#     chart_type = st.sidebar.selectbox("选择图表类型", ["饼图", "其他图表"])
     
-#     # 根据选择的图表类型来显示相应的图表
-#     if chart_type == "饼图":
-#         plot_pie_chart()
-#     # 可以添加更多elif来添加其他图表类型的处理
-#     # elif chart_type == "其他图表":
-#         # 其他图表的函数调用
-
-# # 运行主函数
-
-#     main()
-
-# def plot_pei_LiuYanLin():
-#     # 用户选择地区类型
-#     area_options = ['Urban', 'Semiurban', 'Rural']
-#     selected_areas = st.multiselect('选择地区类型', options=area_options)
-    
-#     # 获取并清洗数据
-#     df_selected = data_selected(is_urban=selected_areas)
-    
-#     # 如果数据不为空，则绘制饼图
-#     if not df_selected.empty:
-#         loan_status_counts = df_selected['Loan_Status'].value_counts().rename(index={1: 'Yes', 0: 'No'})
-#         data_pair = [list(z) for z in zip(loan_status_counts.index, loan_status_counts.values)]
-#         pie_chart = (
-#             Pie()
-#             .add("", data_pair)
-#             .set_global_opts(title_opts=opts.TitleOpts(title="贷款成功率"))
-#             .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
-#         )
-#         st_pyecharts(pie_chart)
-#     else:
-#         st.error("根据所选地区没有找到数据，请重新选择。")
-
-
 #Author:Yuxi Guo
 def main():
     #This section is to implement the control flow of our app, where the pages designing are implemented.
