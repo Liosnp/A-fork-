@@ -140,8 +140,10 @@ def page_plot_box():
 #This section is to design pie chart of our dataset.
 def page_plot_pie():
     plt.style.use("ggplot")
-    st.markdown('# **On this page, you can clearly understand the proportion of data in different categories** :astonished:')
-
+    st.markdown('# **On this page, you can clearly understand the proportion of data in different categories** :thinkingface:')
+    st.markdown('''
+    ### 🔔 Use <button class="btn"> multi-select </button> to change the category
+    ''', unsafe_allow_html=True)
     df_selected = data_selected()
     df_x=df_selected[['Is_Female','Is_graduate','Is_married','Is_urban','Is_self_employed','Loan_Status','Credit_History','Dependents']]
     choice_x=st.selectbox('Ways to classify',df_x.columns.tolist())
