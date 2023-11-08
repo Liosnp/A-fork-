@@ -126,8 +126,8 @@ def page_plot_bar():
 def page_plot_box():
     plt.style.use("ggplot")
     st.title('Boxplot')
-    st.markdown("<h2 style='font-weight: bold;'>APP Introduction:</h2>\n" "   箱形图（Box Plot）或箱线图（Box-and-Whisker Plot）是一种用于显示一组数据分散情况资料的统计图。以下是它的几个关键特点：", unsafe_allow_html=True) 
- 
+    st.markdown('# This page will tell you about the discreteness of the data')
+
     df_selected = data_selected().drop('Loan_ID',axis=1)
     df_x=df_selected[['Is_Female','Is_graduate','Is_married','Is_urban','Is_self_employed','Loan_Status','Credit_History','Dependents']]
     df_y=df_selected.drop(['Is_Female','Is_graduate','Is_married','Is_urban','Is_self_employed','Loan_Status','Credit_History','Dependents'],axis=1)
@@ -216,7 +216,8 @@ def plot_pie_chart():
     )
     
     # 使用st_pyecharts在Streamlit中渲染饼图
-    st_pyecharts(pie_chart)
+    st.write(st_pyecharts(pie_chart))s
+    
 
 
 
