@@ -212,9 +212,7 @@ def page_plot_heatmap():
 
 
 
-# 首先，我们需要读取数据集并基于Property_Area列和Loan_Status列生成饼图所需的data_pair
 
-# 由于我们无法直接读取文件，以下代码块应在本地环境中执行。
 
 
 def plot_pie_LiuYanLin():
@@ -229,14 +227,17 @@ def plot_pie_LiuYanLin():
     urban_data_pair = [list(item) for item in urban_data.items()]
     
     # 生成饼图数据
-    pie_chart = Pie()
-    pie_chart.add("", urban_data_pair)
-    pie_chart.set_global_opts(title_opts=opts.TitleOpts(title="Urban Area Loan Approval Rates"))
-    pie_chart.set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
-   
+    pie_chart = (
+        Pie()
+        .add("", urban_data_pair)
+        .set_global_opts(title_opts=opts.TitleOpts(title="Urban Area Loan Approval Rates"))
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
+        # 在 Streamlit 中通常不需要使用 .render() 方法
+    )
     
     
-    st_pyecharts(pie_chart)
+        
+     st_pyecharts(pie_chart)
 
 #-------------------------------------------------------------
 # def main():
