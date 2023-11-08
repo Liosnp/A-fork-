@@ -222,30 +222,73 @@ def page_plot_heatmap():
     
 #     st_pyecharts(c)
 
-#---------------------------------------------------------------
-def plot_pie_LiuYanLin():
-    # 加载数据集
-    df_selected = data_selected()
-    # 计算每个地区贷款成功的比例
-    loan_status_by_area = df_selected.groupby('Property_Area')['Loan_Status'].value_counts(normalize=True).unstack()
+# #---------------------------------------------------------------
+# def plot_pie_LiuYanLin():
+#     # 加载数据集
+#     df_selected = data_selected()
+#     # 计算每个地区贷款成功的比例
+#     loan_status_by_area = df_selected.groupby('Property_Area')['Loan_Status'].value_counts(normalize=True).unstack()
     
     
-    # 选择一个地区进行可视化，例如 'Urban'
-    urban_data = loan_status_by_area['Urban'].to_dict()
-    urban_data_pair = [list(item) for item in urban_data.items()]
+#     # 选择一个地区进行可视化，例如 'Urban'
+#     urban_data = loan_status_by_area['Urban'].to_dict()
+#     urban_data_pair = [list(item) for item in urban_data.items()]
     
-    # 生成饼图数据
-    pie_chart = (
-        Pie()
-        .add("", urban_data_pair)
-        .set_global_opts(title_opts=opts.TitleOpts(title="Urban Area Loan Approval Rates"))
-        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
+#     # 生成饼图数据
+#     pie_chart = (
+#         Pie()
+#         .add("", urban_data_pair)
+#         .set_global_opts(title_opts=opts.TitleOpts(title="Urban Area Loan Approval Rates"))
+#         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
       
-    )
+#     )
     
     
         
-     st_pyecharts(pie_chart)
+#      st_pyecharts(pie_chart)
+#-------------------------------------------------------------
+    # app.py
+
+
+
+# 假设 wash_data() 函数和 data_selected() 函数已经定义好，并且可以正常工作
+
+def plot_pie_chart(data, title):
+   
+    status_counts = data['Loan_Status'].value_counts(normalize=True)
+    data_pair = [list(z) for z in zip(status_counts.index, status_counts.values)]
+    pie = (
+        Pie()
+        .add("", data_pair)
+        .set_global_opts(title_opts=opts.TitleOpts(title="Loan Approval Rates"))
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
+    )
+    return pie
+
+def main_for_pie():
+    st.title("贷款成功率饼图")
+
+    # 从文件加载数据
+    df = data_selected()
+
+    # 转换贷款状态为字符串标签
+    df['Loan_Status'] = df['Loan_Status'].map({'Y': 'Yes', 'N': 'No'})#???????
+
+    # 用户选择地区类型
+    area_options = st.multiselect(
+        '选择地区类型', 
+        options=['Urban', 'Semiurban', 'Rural'],
+        default=['Urban', 'Semiurban', 'Rural']
+    )
+
+    # 根据所选地区筛选数据
+    if area_options:
+        df_selected = df[df['Property_Area'].isin(area_options)]
+        if not df_selected.empty:
+            pie_chart = plot_pie_chart(df_selected, "贷款成功率")
+            st_pyecharts(pie_chart)
+        else:
+            st.error("没有找到选定地区的数据。")
 
 #-------------------------------------------------------------
 # def main():
@@ -305,7 +348,7 @@ def main():
     elif page=='Plot_heatmap':
         page_plot_heatmap()
     elif page=='LiuYanlin_pie':
-        plot_pie_LiuYanLin()    
+        main_for_pie() 
     elif page=='LiuTianqi':
         page_question2()
     elif page=='HuXintong':
