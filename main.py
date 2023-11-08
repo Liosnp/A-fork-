@@ -216,7 +216,8 @@ def plot_pie_chart():
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
         
     )
-    st.st_pyecharts(pie_chart)
+    st.write("## made it here"))
+    st_pyecharts(pie_chart)
     # 使用st_pyecharts在Streamlit中渲染饼图
     return None
 
