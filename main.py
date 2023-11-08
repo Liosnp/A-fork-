@@ -195,11 +195,11 @@ def plot_pie_chart():
     
     # 贷款状态映射到字符串标签
     df_selected['Loan_Status'] = df_selected['Loan_Status'].map({'Y': 'Yes', 'N': 'No'})
-    
+    st.write("# read in data")
     # 用户选择地区类型
     area_options = ['Urban', 'Semiurban', 'Rural']
     selected_area = st.sidebar.selectbox('选择地区类型', area_options)
-    
+    st.write("# past selection")
     # 根据所选地区筛选数据
     df_area_selected = df_selected[df_selected['Property_Area'] == selected_area]
     
