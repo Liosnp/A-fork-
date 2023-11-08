@@ -173,60 +173,17 @@ def page_plot_heatmap():
     st.pyplot(fig)
     return None
 
-
-def plot_pie_LiuYanLin():
+#-----------------------------------------------------------------
+# def plot_pie_LiuYanLin():
    
 
     
-    # 获取筛选后的数据
-    data = data_selected()
-    # 转换数据格式以符合pyecharts饼图的要求
-    loan_status = data['Loan_Status'].value_counts(normalize=True)
-
-    data_pair = [list(z) for z in zip(loan_status.index, loan_status.values)]
-    
-    # 创建饼图
-    pie_chart = (
-        Pie()
-        .add(
-            series_name="示例系列",
-            data_pair=data_pair,
-            radius=["40%", "75%"],
-            label_opts=opts.LabelOpts(
-                position="outside",
-                formatter="{b|{b}: }{c}  ({d}%)",
-                rich={
-                    "b": {"fontSize": 16, "lineHeight": 33},
-                    "per": {"color": "#eee", "backgroundColor": "#334455", "padding": [2, 4], "borderRadius": 2},
-                },
-            ),
-        )
-        .set_global_opts(title_opts=opts.TitleOpts(title="饼图示例"))
-        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
-    )
-    
-    # 使用st_pyecharts在Streamlit中渲染饼图
-    st_pyecharts(pie_chart)
-
-
-
-
-
-# 选的模板
-# # 假设这是您的数据选取函数
-# def data_selected():
-#     # 这里应该有数据处理的代码，返回DataFrame
-#     # 为了演示，我们将使用一个简单的字典来模拟DataFrame
-#     return {
-#         '分类': ['分类1', '分类2', '分类3'],
-#         '计数': [10, 20, 30]
-#     }
-
-# def plot_pie_chart():
 #     # 获取筛选后的数据
 #     data = data_selected()
 #     # 转换数据格式以符合pyecharts饼图的要求
-#     data_pair = [list(z) for z in zip(data['分类'], data['计数'])]
+#     loan_status = data['Loan_Status'].value_counts(normalize=True)
+
+#     data_pair = [list(z) for z in zip(loan_status.index, loan_status.values)]
     
 #     # 创建饼图
 #     pie_chart = (
@@ -250,6 +207,49 @@ def plot_pie_LiuYanLin():
     
 #     # 使用st_pyecharts在Streamlit中渲染饼图
 #     st_pyecharts(pie_chart)
+#-------------------------------------------------------------------------
+
+
+
+
+选的模板
+# 假设这是您的数据选取函数
+def data_selected():
+    # 这里应该有数据处理的代码，返回DataFrame
+    # 为了演示，我们将使用一个简单的字典来模拟DataFrame
+    return {
+        '分类': ['分类1', '分类2', '分类3'],
+        '计数': [10, 20, 30]
+    }
+
+def plot_pie_LiuYanLin():
+    # 获取筛选后的数据
+    data = data_selected()
+    # 转换数据格式以符合pyecharts饼图的要求
+    data_pair = [list(z) for z in zip(data['分类'], data['计数'])]
+    
+    # 创建饼图
+    pie_chart = (
+        Pie()
+        .add(
+            series_name="示例系列",
+            data_pair=data_pair,
+            radius=["40%", "75%"],
+            label_opts=opts.LabelOpts(
+                position="outside",
+                formatter="{b|{b}: }{c}  ({d}%)",
+                rich={
+                    "b": {"fontSize": 16, "lineHeight": 33},
+                    "per": {"color": "#eee", "backgroundColor": "#334455", "padding": [2, 4], "borderRadius": 2},
+                },
+            ),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="饼图示例"))
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+    )
+    
+    # 使用st_pyecharts在Streamlit中渲染饼图
+    st_pyecharts(pie_chart)
 
 # def main():
 #     # 创建一个侧边栏选择器，用于选择饼图的显示方式
