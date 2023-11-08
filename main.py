@@ -272,7 +272,7 @@ def main_for_pie():
     df = data_selected()
 
     # 转换贷款状态为字符串标签
-    df['Loan_Status'] = df['Loan_Status'].map({'Y': 'Yes', 'N': 'No'})#???????
+    df['Loan_Status'] = df['Loan_Status'].map({1: 'Yes', 0: 'No'})#???????
 
     # 用户选择地区类型
     area_options = st.multiselect(
