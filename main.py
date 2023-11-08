@@ -142,7 +142,7 @@ def page_plot_box():
 def page_plot_pie():
     plt.style.use("ggplot")
     
-    st.markdown('# **On this page, you can clearly understand the proportion of data in different categories** :thinkingface:')
+    st.markdown('# **On this page, you can clearly understand the proportion of data in different categories** :thinking_face:')
     st.markdown('''
     ### 🔔 Use `multi-select` to change the category
     ''', unsafe_allow_html=True)
@@ -191,14 +191,17 @@ def page_plot_heatmap():
 #-----------------------------------------------------------------
 
 def plot_pie_chart():
-
+    st.markdown('# **I don't know your loan success rate? 🤷‍♂️** ')
+    st.markdown('''
+    ### COME AND SEE !
+    ''', unsafe_allow_html=True)
     df_selected = pd.read_csv('loan_sanction_train.csv')
     
     # 贷款状态映射到字符串标签
     df_selected['Loan_Status'] = df_selected['Loan_Status'].map({'Y': 'Yes', 'N': 'No'})
     # 用户选择地区类型
     area_options = ['Urban', 'Semiurban', 'Rural']
-    selected_area = st.sidebar.selectbox('选择地区类型', area_options)
+    selected_area = st.selectbox(' Choose where you live', area_options)
     # 根据所选地区筛选数据
     df_area_selected = df_selected[df_selected['Property_Area'] == selected_area]
     
