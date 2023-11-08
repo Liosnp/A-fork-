@@ -191,6 +191,8 @@ def page_plot_heatmap():
 #-----------------------------------------------------------------
 
 def plot_pie_chart():
+
+    st.write("Starting plot_pie_chart()")
     df_selected = pd.read_csv('loan_sanction_train.csv')
     
     # 贷款状态映射到字符串标签
