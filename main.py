@@ -196,7 +196,8 @@ def plot_pie_chart():
     ### COME AND SEE !
     ''', unsafe_allow_html=True)
     df_selected = pd.read_csv('loan_sanction_train.csv')
-   
+    image_path = 'image.png'  
+    st.image(image_path, caption='Caption for image', use_column_width=True)
     
     # 贷款状态映射到字符串标签
     df_selected['Loan_Status'] = df_selected['Loan_Status'].map({'Y': 'Yes', 'N': 'No'})
