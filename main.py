@@ -105,9 +105,10 @@ def page_plot_bar():
     plt.style.use("ggplot")
     df_selected=data_selected()
     
-    st.markdown('# **Average value matters，while making your own decision** :thinking_face:')
+
+    st.markdown('# **On this page, you can clearly understand the proportion of data in different categories** :thinkingface:')
     st.markdown('''
-    ### :bell: Use `<button class="btn">multi-select</button>` to change the category
+    ### 🔔 Use `multi-select` to change the category
     ''', unsafe_allow_html=True)
     
     df_x=df_selected[['Is_Female','Is_graduate','Is_married','Is_urban','Is_self_employed','Loan_Status','Credit_History','Dependents']]
