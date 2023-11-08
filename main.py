@@ -191,21 +191,22 @@ def page_plot_heatmap():
 #-----------------------------------------------------------------
 
 def plot_pie_chart():
-    # 使用data_selected()函数获取筛选后的数据
     df_selected = pd.read_csv('loan_sanction_train.csv')
+    
     # 贷款状态映射到字符串标签
-    df_selected['Loan_Status'] = df_selected['Loan_Status'].map({1: 'Yes', 0: 'No'})
+    df_selected['Loan_Status'] = df_selected['Loan_Status'].map({'Y': 'Yes', 'N': 'No'})
     
     # 用户选择地区类型
     area_options = ['Urban', 'Semiurban', 'Rural']
-    selected_area = st.sidebar.selectbox('sometext', options=area_options)
-    #选择地区类型
+    selected_area = 'Urban' #st.sidebar.selectbox('选择地区类型', options=area_options)
+    
     # 根据所选地区筛选数据
     df_area_selected = df_selected[df_selected['Property_Area'] == selected_area]
     
     # 计算贷款状态的分布
-    loan_status_distribution = df_area_selected['Loan_Status'].value_counts(normalize=True)
+    loan_status_distribution = df_area_selected[['Loan_Status']].value_counts(normalize=True)
     data_pair = [list(z) for z in zip(loan_status_distribution.index.tolist(), loan_status_distribution.values.tolist())]
+
     
     # 创建饼图
     pie_chart = (
@@ -213,11 +214,10 @@ def plot_pie_chart():
         .add("", data_pair)
         .set_global_opts(title_opts=opts.TitleOpts(title=f"{selected_area} Area Loan Approval Rates"))
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
-        
+        .render("liuyan_pie.html")
     )
     
     # 使用st_pyecharts在Streamlit中渲染饼图
-    pie_chart.render("liuyan_pie.html")
     return None
 
     
