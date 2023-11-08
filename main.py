@@ -233,11 +233,10 @@ def plot_pie_LiuYanLin():
     pie_chart.add("", urban_data_pair)
     pie_chart.set_global_opts(title_opts=opts.TitleOpts(title="Urban Area Loan Approval Rates"))
     pie_chart.set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
-    # 通常不需要在 Streamlit 中使用render，因为我们会使用st_pyecharts来渲染饼图
-    # pie_chart.render("pie_base.html")
+   
     
-    # 以下是 Streamlit 渲染饼图的代码，应在您的 Streamlit 应用脚本中执行
-    # st_pyecharts(pie_chart)
+    
+    st_pyecharts(pie_chart)
 
 #-------------------------------------------------------------
 # def main():
