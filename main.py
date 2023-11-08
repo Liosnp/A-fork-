@@ -349,7 +349,7 @@ def main():
         page_plot_heatmap()
     elif page=='LiuYanlin_pie':
         plot_pie_chart()
-        print（'jsbdjb')
+        print('jsbdjb')
     elif page=='LiuTianqi':
         page_question2()
     elif page=='HuXintong':
