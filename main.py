@@ -254,17 +254,46 @@ def page_plot_heatmap():
 # 假设 wash_data() 函数和 data_selected() 函数已经定义好，并且可以正常工作
 
 def plot_pie_chart():
-    df_selected=data_selected()
-    status_counts = df_selected['Loan_Status'].value_counts(normalize=True)
-    data_pair = [list(z) for z in zip(status_counts.index, status_counts.values)]
-    pie = (
+    # 使用data_selected()函数获取筛选后的数据
+    df_selected = data_selected()
+    # 贷款状态映射到字符串标签
+    df_selected['Loan_Status'] = df_selected['Loan_Status'].map({1: 'Yes', 0: 'No'})
+    
+    # 用户选择地区类型
+    area_options = ['Urban', 'Semiurban', 'Rural']
+    selected_area = st.sidebar.selectbox('选择地区类型', options=area_options)
+    
+    # 根据所选地区筛选数据
+    df_area_selected = df_selected[df_selected['Property_Area'] == selected_area]
+    
+    # 计算贷款状态的分布
+    loan_status_distribution = df_area_selected['Loan_Status'].value_counts(normalize=True)
+    data_pair = [list(z) for z in zip(loan_status_distribution.index.tolist(), loan_status_distribution.values.tolist())]
+    
+    # 创建饼图
+    pie_chart = (
         Pie()
         .add("", data_pair)
-        .set_global_opts(title_opts=opts.TitleOpts(title="Loan Approval Rates"))
+        .set_global_opts(title_opts=opts.TitleOpts(title=f"{selected_area} Area Loan Approval Rates"))
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
     )
-    st_pyecharts(pie)
-    return None
+    
+    # 使用st_pyecharts在Streamlit中渲染饼图
+    st_pyecharts(pie_chart)
+
+
+
+    # df_selected=data_selected()
+    # status_counts = df_selected['Loan_Status'].value_counts(normalize=True)
+    # data_pair = [list(z) for z in zip(status_counts.index, status_counts.values)]
+    # pie = (
+    #     Pie()
+    #     .add("", data_pair)
+    #     .set_global_opts(title_opts=opts.TitleOpts(title="Loan Approval Rates"))
+    #     .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c} ({d}%)"))
+    # )
+    # st_pyecharts(pie)
+    # return None
 # def main_for_pie():
 #     st.title("贷款成功率饼图")
 
@@ -349,7 +378,7 @@ def main():
         page_plot_heatmap()
     elif page=='LiuYanlin_pie':
         plot_pie_chart()
-        print('jsbdjb')
+        
     elif page=='LiuTianqi':
         page_question2()
     elif page=='HuXintong':
