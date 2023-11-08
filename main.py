@@ -211,8 +211,8 @@ def page_plot_heatmap():
 
 
 from pyecharts.faker import Faker
-def plot_pie_LiuYanLin():
-    c = (
+
+c = (
         Pie()
         .add("", [list(z) for z in zip(Faker.choose(), Faker.values())])
         .set_global_opts(title_opts=opts.TitleOpts(title="Pie-基本示例"))
@@ -220,7 +220,7 @@ def plot_pie_LiuYanLin():
         .render("pie_base.html")
     )
     
-    st_pyecharts(pie_chart)
+st_pyecharts(pie_chart)
 
 #---------------------------------------------------------------
 # def plot_pie_LiuYanLin():
