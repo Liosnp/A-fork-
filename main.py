@@ -216,7 +216,7 @@ def plot_pie_chart():
     )
     
     # 使用st_pyecharts在Streamlit中渲染饼图
-    st.write(st_pyecharts(pie_chart))
+    st.pyplot(st_pyecharts(pie_chart))
     
 
 
